@@ -1,0 +1,372 @@
+{
+  "pba": {
+    "status": "ACTIVE",
+    "authorInfo": {
+      "author": "aia",
+      "email": "aia@ericsson.com",
+      "publishingDate": "22/11/2017 3:30:00",
+      "location": "Athlone"
+    },
+    "applicationInfo": {
+      "id": "",
+      "name": "",
+      "title": "",
+      "version": "",
+      "description": ""
+    },
+    "templateInfo": {
+      "id": "",
+      "name": "Spark-Streaming",
+      "title": "Spark Streaming",
+      "version": "1.0.8",
+      "description": "Spark Streaming Template to simplify the Spark Kafka streaming application development complexities, it provides generated driver java class, allowing developer to focus on business logic implementation. It supports a variety persistent storage and data formats.  For more information, visit documentation."
+    },
+    "icon": "<icon path>",
+    "scmInfo": {
+      "scm": "ssh://git@10.44.149.55:443/root/Spark-Streaming.git",
+      "scmTag": "Spark-Streaming-1.0.8"
+    },
+    "processorInfo": {
+      "id": "49206861-7465-2079-6f75-20616c6c0000",
+      "technology": "SPARK",
+      "version": "2.1.0"
+    },
+    "extensionPoints": [
+      {
+        "technology": "kafka",
+        "description": "Kafka 10 data source",
+        "name": "DataSource_kafka10",
+        "uri": {
+          "protocol": "kafka://",
+          "address": "input_topic",
+          "args": [
+            {
+              "key": "format",
+              "value": [
+                [
+                  "String",
+                  "Avro",
+                  "Binary"
+                ]
+              ]
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "key": "bootstrap.servers",
+            "value": "localhost:9092",
+            "regex": ".*",
+            "isReadOnly": false,
+            "help": "A list of host/port pairs to use for establishing the initial connection to the Kafka cluster. The client will make use of all servers irrespective of which servers are specified here for bootstrapping—this list only impacts the initial hosts used to discover the full set of servers. This list should be in the form host1:port1,host2:port2,...",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "group.id",
+            "value": "<group_1>",
+            "isReadOnly": false,
+            "help": "A unique string that identifies the consumer group this consumer belongs to. This property is required if the consumer uses either the group management functionality by using subscribe(topic) or the Kafka-based offset management strategy.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "enable.auto.commit",
+            "value": "true",
+            "isReadOnly": false,
+            "help": "If true the consumer's offset will be periodically committed in the background.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "auto.commit.interval.ms",
+            "value": "1000",
+            "isReadOnly": false,
+            "help": "The frequency in milliseconds that the consumer offsets are auto-committed to Kafka if enable.auto.commit is set to true.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "key.deserializer",
+            "value": "org.apache.kafka.common.serialization.StringDeserializer",
+            "isReadOnly": false,
+            "help": "Deserializer class for key that implements the Deserializer interface.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "value.deserializer",
+            "value": "org.apache.kafka.common.serialization.StringDeserializer",
+            "isReadOnly": false,
+            "help": "Deserializer class for value that implements the Deserializer interface.",
+            "isRequired": true,
+            "type": "string"
+          }
+        ],
+        "id": "3feacdb8-e8e6-45c5-8e85-96a6b95d4e18"
+      }
+    ],
+    "integrationPoints": [
+      {
+        "technology": "mysql",
+        "description": "The MySQL data sink writes data to a specified table within a MySQL database",
+        "name": "DataSink_jdbc_mysql",
+        "uri": {
+          "protocol": "jdbc://",
+          "address": "connection url",
+          "args": []
+        },
+        "attributes": [
+          {
+            "key": "password",
+            "value": "<password>",
+            "isReadOnly": false,
+            "help": "The password used to connect to the My SQL database",
+            "isRequired": false,
+            "type": "string"
+          },
+          {
+            "key": "user",
+            "value": "<user-name>",
+            "isReadOnly": false,
+            "help": "The username used to connect to the My SQL database",
+            "isRequired": false,
+            "type": "string"
+          },
+          {
+            "key": "driver",
+            "value": "com.mysql.jdbc.Driver",
+            "isReadOnly": false,
+            "help": "The JDBC driver class that implements the java.sql.Driver interface",
+            "isRequired": false,
+            "type": "string"
+          },
+          {
+            "key": "table.name",
+            "value": "<table-name>",
+            "isReadOnly": false,
+            "help": "The name of the table to write to",
+            "isRequired": false,
+            "type": "string"
+          }
+        ],
+        "id": "03ac8217-a01b-49ce-bc54-50c535e96672"
+      },
+      {
+        "technology": "file",
+        "description": "file data sink",
+        "name": "file",
+        "uri": {
+          "protocol": "file://",
+          "address": "/tmp",
+          "args": [
+              {
+                "key": "format",
+                "value": [
+                  [
+                    "csv",
+					"json",
+					"orc",
+					"parquet",
+					"text",
+					"xml"
+                  ]
+                ]
+              }
+          ]
+        },
+        "attributes": [
+          {
+            "key": "header",
+            "value": "false",
+            "isReadOnly": false,
+            "isRequired": false,
+            "type": "string"
+          },
+          {
+            "key": "data.format",
+            "value": [
+              "csv",
+              "json",
+ 			  "orc",
+              "parquet",
+              "text",
+              "xml"
+            ],
+            "isReadOnly": false,
+            "isRequired": true,
+            "type": "string"
+          }
+        ],
+        "id": "13021852-0838-4738-8a74-10464307c6d8"
+      },
+      {
+        "technology": "kafka",
+        "description": "Kafka data sink for kafka 10",
+        "name": "DataSink_kafka10",
+        "uri": {
+          "protocol": "kafka://",
+          "address": "output_topic",
+          "args": [
+            {
+              "key": "format",
+              "value": [
+                [
+                  "String",
+                  "Avro",
+                  "Binary"
+                ]
+              ]
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "key": "bootstrap.servers",
+            "value": "localhost:9092",
+            "isReadOnly": false,
+            "help": "A list of host/port pairs to use for establishing the initial connection to the Kafka cluster. The client will make use of all servers irrespective of which servers are specified here for bootstrapping—this list only impacts the initial hosts used to discover the full set of servers. This list should be in the form host1:port1,host2:port2,...",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "acks",
+            "value": "0",
+            "isReadOnly": false,
+            "help": "The number of acknowledgments the producer requires the leader to have received before considering a request complete. This controls the durability of records that are sent. The following settings are allowed: acks=0 If set to zero then the producer will not wait for any acknowledgment from the server at all. The record will be immediately added to the socket buffer and considered sent. No guarantee can be made that the server has received the record in this case, and the retries configuration will not take effect (as the client won't generally know of any failures). The offset given back for each record will always be set to -1. acks=1 This will mean the leader will write the record to its local log but will respond without awaiting full acknowledgement from all followers. In this case should the leader fail immediately after acknowledging the record but before the followers have replicated it then the record will be lost. acks=all This means the leader will wait for the full set of in-sync replicas to acknowledge the record. This guarantees that the record will not be lost as long as at least one in-sync replica remains alive. This is the strongest available guarantee. This is equivalent to the acks=-1 setting.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "retries",
+            "value": "0",
+            "isReadOnly": false,
+            "help": "Setting a value greater than zero will cause the client to resend any record whose send fails with a potentially transient error. Note that this retry is no different than if the client resent the record upon receiving the error. Allowing retries without setting max.in.flight.requests.per.connection to 1 will potentially change the ordering of records because if two batches are sent to a single partition, and the first fails and is retried but the second succeeds, then the records in the second batch may appear first.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "batch.size",
+            "value": "16384",
+            "isReadOnly": false,
+            "help": "No attempt will be made to batch records larger than this size. Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent. A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "linger.ms",
+            "value": "1",
+            "isReadOnly": false,
+            "help": "The producer groups together any records that arrive in between request transmissions into a single batched request. Normally this occurs only under load when records arrive faster than they can be sent out. However in some circumstances the client may want to reduce the number of requests even under moderate load. This setting accomplishes this by adding a small amount of artificial delay—that is, rather than immediately sending out a record the producer will wait for up to the given delay to allow other records to be sent so that the sends can be batched together. This can be thought of as analogous to Nagle's algorithm in TCP. This setting gives the upper bound on the delay for batching: once we get batch.size worth of records for a partition it will be sent immediately regardless of this setting, however if we have fewer than this many bytes accumulated for this partition we will 'linger' for the specified time waiting for more records to show up. This setting defaults to 0 (i.e. no delay). Setting linger.ms=5, for example, would have the effect of reducing the number of requests sent but would add up to 5ms of latency to records sent in the absense of load.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "buffer.memory",
+            "value": "33554432",
+            "isReadOnly": false,
+            "help": "The total bytes of memory the producer can use to buffer records waiting to be sent to the server. If records are sent faster than they can be delivered to the server the producer will block for max.block.ms after which it will throw an exception. This setting should correspond roughly to the total memory the producer will use, but is not a hard bound since not all memory the producer uses is used for buffering.Some additional memory will be used for compression( if compression is enabled) as well as for maintaining in -flight requests.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "key.serializer",
+            "value": "org.apache.kafka.common.serialization.StringSerializer",
+            "isReadOnly": false,
+            "help": "Serializer class for key that implements the Serializer interface.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "value.serializer",
+            "value": "org.apache.kafka.common.serialization.StringSerializer",
+            "isReadOnly": false,
+            "help": "Serializer class for value that implements the Serializer interface.",
+            "isRequired": true,
+            "type": "string"
+          }
+        ],
+        "id": "3feacdb8-e8e6-45c5-8e85-96a6b95d4e18"
+      },
+      {
+          "technology": "PostgreSQL",
+          "description": "Jdbc Postgress sql for data sink",
+          "name": "DataSink_jdbc_postgresssql_9.x",
+          "uri": {
+            "protocol": "jdbc://",
+            "address": "localhost:5432",
+            "args": [
+              {
+                "key": "format",
+                "value": [
+                  [
+                    ""
+                  ]
+                ]
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "key": "password",
+              "value": "<password>",
+              "isReadOnly": false,
+              "help": "The PostgreSQL database user's password.",
+              "isRequired": false,
+              "type": "string"
+            },
+            {
+              "key": "user",
+              "value": "<user-name>",
+              "isReadOnly": false,
+              "help": "The PostgreSQL database user on whose behalf the connection is being made.",
+              "isRequired": false,
+              "type": "string"
+            },
+            {
+              "key": "driver",
+              "value": "org.postgresql.Driver",
+              "isReadOnly": true,
+              "help": "The JDBC driver class that implements the java.sql.Driver interface",
+              "isRequired": true,
+              "type": "string"
+            },
+            {
+              "key": "table.name",
+              "value": "<table-name>",
+              "isReadOnly": false,
+              "help": "The name of the table to write to",
+              "isRequired": false,
+              "type": "string"
+            },
+            {
+              "key": "ssl",
+              "value": "true",
+              "isReadOnly": false,
+              "help": "Connect using SSL. The driver must have been compiled with SSL support. This property does not need a value associated with it. The mere presence of it specifies a SSL connection. However, for compatibility with future versions, the value 'true' is preferred.",
+              "isRequired": false,
+              "type": "string"
+            }
+          ],
+          "id": "275a4a67-ec5e-4c67-b31e-bce81a77d193"
+        }
+    ],
+    "buildInfo": {
+      "container": {
+        "docker": {
+          "name": "pbaName-app",
+          "repoBaseUrl": "https://arm.epk.ericsson.se/artifactory",
+          "repoPath": "docker-v2-global-local",
+          "imagePath": "aia/spark-streaming/pbaName/latest/",
+          "network": "HOST",
+          "portList": [],
+          "mountPaths": [],
+          "mountName": [],
+          "forcePullImage": true,
+          "privileged": true
+        }
+      },
+      "dependencies": []
+    }
+  }
+}
